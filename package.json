@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "license": "ISC",
   "scripts": {
-    "start": "node lib/index"
+    "start": "node lib/index",
+    "dev": "nodemon --exec node lib/index.js"
   },
   "keywords": [
     "graphql"
   ],
   "dependencies": {
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
     "graphql": "^0.12.3",
     "mongodb": "^2.1.18",
     "pg": "^6.0.1"

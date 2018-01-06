@@ -1,5 +1,6 @@
 module.exports = {
   development: {
-    database: 'contests'
+    database: 'contests',
+    password: process.env.NODE_PASSWORD || 'password'
   }
 };
