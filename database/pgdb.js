@@ -1,29 +1,12 @@
-const humps = require('humps');
-const _ = require('lodash');
+const { orderedFor } = require('../lib/util');
 
 module.exports = pgPool => {
-  const orderedFor = (rows, collection, field, singleObject) => {
-    // return the rows ordered for the collection
-    const data = humps.camelizeKeys(rows);
-    const inGroupsOfField = _.groupBy(data, field);
-    return collection.map(element => {
-      const elementArray = inGroupsOfField[element];
-      if (elementArray) {
-        return singleObject ? elementArray[0] : elementArray;
-      }
-      return singleObject ? {} : [];
-    });
-  };
-
   return {
     getUsersByIds(userIds) {
-      console.log('getUsersByIds', JSON.stringify(userIds));
       return pgPool.query(`
         select * from users
         where id = ANY($1)
       `, [userIds]).then(res => {
-        console.log('res', JSON.stringify(res));
-        console.log('orderedFor', orderedFor(res.rows, userIds, 'id', true));
         return orderedFor(res.rows, userIds, 'id', true);
       });
     },
@@ -52,6 +35,15 @@ module.exports = pgPool => {
         where contest_id = ANY($1)
       `, [contestIds]).then(res => {
         return orderedFor(res.rows, contestIds, 'contestId', false);
+      });
+    },
+
+    getTotalVotesByNameIds(nameIds) {
+      return pgPool.query(`
+        select name_id, up, down from total_votes_by_name
+        where name_id = ANY($1)
+      `, [nameIds]).then(res => {
+        return orderedFor(res.rows, nameIds, 'nameId', true);
       });
     }
   };

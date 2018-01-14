@@ -4,7 +4,7 @@
   "license": "ISC",
   "scripts": {
     "start": "node lib/index",
-    "dev": "nodemon --exec node --inspect-brk lib/index.js"
+    "dev": "nodemon --exec node lib/index.js"
   },
   "keywords": [
     "graphql"
