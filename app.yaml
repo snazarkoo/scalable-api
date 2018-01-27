@@ -1,0 +1,13 @@
+runtime: nodejs
+env: flex
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+env_variables:
+  NODE_PG_URL: "postgres://canqlgdo:j0bqSwvh5yc7YbC3ymRX8_E2dzMiq0lF@horton.elephantsql.com:5432/canqlgdo"
+  NODE_MONGO_URL: "mongodb://snazarkoo:19982008@scalable-api-shard-00-00-o0mmj.mongodb.net:27017,scalable-api-shard-00-01-o0mmj.mongodb.net:27017,scalable-api-shard-00-02-o0mmj.mongodb.net:27017/contests?ssl=true&replicaSet=scalable-api-shard-0&authSource=admin"
